@@ -1,0 +1,67 @@
+{
+  "name": "terminal-meme-error-sounds",
+  "displayName": "Terminal Meme Error Sounds",
+  "description": "Plays hilarious custom sounds like 'faah' or 'aah shit here we go again' every time your terminal command fails. Debugging just got fun!",
+  "version": "1.0.0",
+  "publisher": "0xasr-dev",
+  "icon": "media/icon.png",
+  "keywords": [
+    "terminal",
+    "sound",
+    "meme",
+    "error",
+    "funny",
+    "audio",
+    "faah"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0xasr-dev/terminal-meme-error-sounds"
+  },
+  "engines": {
+    "vscode": "^1.93.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "terminalMemeSounds.test",
+        "title": "Terminal Meme Sounds: Test Random Sound"
+      }
+    ],
+    "configuration": {
+      "title": "Terminal Meme Error Sounds",
+      "properties": {
+        "terminalMemeSounds.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable/disable the meme sounds"
+        },
+        "terminalMemeSounds.debounceMs": {
+          "type": "number",
+          "default": 2500,
+          "description": "Cooldown between sounds (ms) to prevent spam"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.93.0",
+    "@vscode/vsce": "^3.7.1",
+    "typescript": "^5.3.3"
+  }
+}
