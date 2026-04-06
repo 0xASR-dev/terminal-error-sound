@@ -604,6 +604,87 @@ h1.glitch {
     }
 }
 
+/* Author / Creator Section */
+.author-section {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+}
+
+.author-card {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.author-avatar-wrap {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin-bottom: 0.8rem;
+    /* Outer glow that reinforces the cyber-neon theme */
+    filter: drop-shadow(0 0 12px rgba(0, 245, 255, 0.6))
+            drop-shadow(0 0 24px rgba(255, 0, 110, 0.35));
+}
+
+.author-avatar-svg {
+    width: 160px;
+    height: 160px;
+    display: block;
+    overflow: visible;
+}
+
+.author-name {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1.1rem;
+    color: var(--accent-cyan);
+    text-shadow:
+        0 0 8px var(--accent-cyan),
+        0 0 16px var(--accent-cyan);
+    letter-spacing: 0.05em;
+    margin-top: 0.2rem;
+}
+
+.author-subtitle {
+    font-family: 'VT323', monospace;
+    font-size: 1.25rem;
+    color: var(--accent-yellow);
+    text-shadow: 0 0 8px var(--accent-yellow);
+    max-width: 320px;
+    line-height: 1.5;
+}
+
+.author-github {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.75rem;
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+    border: 2px solid var(--accent-cyan);
+    border-radius: 6px;
+    padding: 0.55rem 1.1rem;
+    text-decoration: none;
+    margin-top: 0.4rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 245, 255, 0.25);
+}
+
+.author-github:hover {
+    background: var(--accent-cyan);
+    color: var(--terminal-bg);
+    box-shadow: 0 0 20px var(--accent-cyan);
+    transform: scale(1.05);
+}
+
+.github-icon-svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 10px;
