@@ -3,141 +3,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terminal Meme Error Sounds - VSCode Extension</title>
-    <meta name="description" content="A VSCode extension that plays hilarious meme sounds when your terminal commands fail. Debugging just got fun!">
+    <title>Terminal Meme Error Sounds | Make failed commands unforgettable</title>
+    <meta name="description" content="Terminal Meme Error Sounds is a VS Code extension that detects terminal failures and drops meme audio instantly. Stay in flow, catch errors faster, and customize the soundtrack.">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <canvas id="meme-canvas"></canvas>
-
-    <div class="scanlines"></div>
-
-    <div class="container">
-        <header class="hero">
-            <div class="crt-effect">
-                <h1 class="glitch" data-text="Terminal Meme Error Sounds">
-                    Terminal Meme Error Sounds
-                </h1>
-                <p class="subtitle pixel-text">
-                    🔊 Make terminal errors entertaining again!
-                </p>
-            </div>
-        </header>
-
-        <section class="features">
-            <div class="terminal-window">
-                <div class="terminal-header">
-                    <span class="terminal-button close"></span>
-                    <span class="terminal-button minimize"></span>
-                    <span class="terminal-button maximize"></span>
-                    <span class="terminal-title">terminal-meme-sounds@1.0.0</span>
-                </div>
-                <div class="terminal-body">
-                    <div class="terminal-line">
-                        <span class="prompt">$</span> npm test
-                    </div>
-                    <div class="terminal-line error-line">
-                        <span class="error-text">ERROR: Test suite failed</span>
-                    </div>
-                    <div class="terminal-line">
-                        <span class="meme-text">🎵 *plays "aah shit, here we go again"*</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🎵</div>
-                <h3>Random Meme Sounds</h3>
-                <p>Plays hilarious sounds like "faah" or "ah shit, here we go again" on every error</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">🧠</div>
-                <h3>Smart Detection</h3>
-                <p>4 detection methods: exit codes, output patterns, task failures, and terminal closes</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">⏱️</div>
-                <h3>Debounce Control</h3>
-                <p>Configurable cooldown to prevent sound spam on rapid failures</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">🖥️</div>
-                <h3>Cross-Platform</h3>
-                <p>Works seamlessly on Windows, macOS, and Linux</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">🎲</div>
-                <h3>Customizable</h3>
-                <p>Add your own meme sounds easily - just drop MP3s in the folder</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">🔇</div>
-                <h3>Toggle On/Off</h3>
-                <p>Enable or disable anytime without uninstalling</p>
-            </div>
-        </section>
-
-        <section class="installation">
-            <h2 class="section-title pixel-text">Installation</h2>
-            <div class="install-steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>Open VSCode Extensions</h3>
-                        <code>Ctrl+Shift+X</code>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>Search for Extension</h3>
-                        <code>"Terminal Meme Error Sounds"</code>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>Click Install</h3>
-                        <p>That's it! Start debugging with style 🎉</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="cta">
-            <a href="https://github.com/0xasr-dev/terminal-meme-error-sounds" class="btn btn-primary" target="_blank">
-                <span class="btn-glow"></span>
-                View on GitHub
-            </a>
-            <a href="https://marketplace.visualstudio.com/items?itemName=0xasr-dev.terminal-meme-error-sounds" class="btn btn-secondary" target="_blank">
-                <span class="btn-glow"></span>
-                Install from Marketplace
-            </a>
-        </section>
-
-        <footer class="footer">
-            <p class="pixel-text">
-                Made with ❤️ by <a href="https://github.com/0xasr-dev" target="_blank">0xASR</a>
-            </p>
-            <p class="footer-links">
-                <a href="https://github.com/0xasr-dev/terminal-meme-error-sounds" target="_blank">GitHub</a>
-                <span class="separator">•</span>
-                <a href="https://github.com/0xasr-dev/terminal-meme-error-sounds/issues" target="_blank">Report Issue</a>
-                <span class="separator">•</span>
-                <a href="https://github.com/0xasr-dev/terminal-meme-error-sounds/blob/main/LICENSE" target="_blank">MIT License</a>
-            </p>
-        </footer>
+    <div class="gradient-bg">
+        <div class="orb orb-a"></div>
+        <div class="orb orb-b"></div>
+        <div class="orb orb-c"></div>
     </div>
 
-    <script src="assets/js/memes.js"></script>
-    <script src="assets/js/glitch.js"></script>
+    <header class="nav">
+        <div class="brand">
+            <span class="brand-mark">Terminal</span>
+            <span class="brand-name">Meme Error Sounds</span>
+            <span class="badge">VS Code</span>
+        </div>
+        <nav class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#how">How it works</a>
+            <a href="#customize">Customize</a>
+        </nav>
+        <div class="nav-actions">
+            <a class="btn ghost" href="https://github.com/0xasr-dev/terminal-meme-error-sounds" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="btn primary" href="https://marketplace.visualstudio.com/items?itemName=0xasr-dev.terminal-meme-error-sounds" target="_blank" rel="noreferrer">Install</a>
+        </div>
+    </header>
+
+    <main class="page">
+        <section class="hero" id="top">
+            <div class="hero-copy">
+                <p class="eyebrow">Autoplay meme audio the moment your terminal fails.</p>
+                <h1>Turn every broken command into a signal you can’t ignore.</h1>
+                <p class="lede">
+                    Terminal Meme Error Sounds watches your VS Code terminals, detects failures automatically, and drops iconic meme clips so you catch issues faster and keep coding with a grin.
+                </p>
+                <div class="cta-group">
+                    <a class="btn primary" href="https://marketplace.visualstudio.com/items?itemName=0xasr-dev.terminal-meme-error-sounds" target="_blank" rel="noreferrer">Install on VS Code</a>
+                    <a class="btn secondary" href="https://github.com/0xasr-dev/terminal-meme-error-sounds" target="_blank" rel="noreferrer">View on GitHub</a>
+                </div>
+                <div class="pill-row">
+                    <span class="pill">Exit codes · Output patterns · Build tasks · Terminal closes</span>
+                    <span class="pill">Randomized meme playlist</span>
+                    <span class="pill">Cooldown to prevent spam</span>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="card terminal">
+                    <div class="card-header">
+                        <div class="dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="title">terminal-meme-error-sounds</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="term-line"><span class="prompt">$</span> npm test</div>
+                        <div class="term-line error">✕ Test suite failed</div>
+                        <div class="term-line playback">▶ Playing: "ah-shit-here-we-go-again.mp3"</div>
+                        <div class="meta">Detected via exit code + error keywords</div>
+                        <div class="meter">
+                            <span class="meter-fill"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stack">
+                    <div class="chip">Debounce: 2.5s to keep alerts intentional</div>
+                    <div class="chip">Command Palette → Terminal Meme Sounds: Test Random Sound</div>
+                    <div class="chip accent">Drop your own .mp3 files into media/sounds</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="features">
+            <div class="section-heading">
+                <p class="eyebrow">Why developers keep it on</p>
+                <h2>Catch failures instantly. Stay in flow. Laugh at bugs.</h2>
+                <p class="section-lede">Purpose-built for terminal-heavy workflows so you never miss a broken build, failing test, or typo again.</p>
+            </div>
+
+            <div class="feature-grid">
+                <article class="feature-card">
+                    <div class="icon">🧠</div>
+                    <h3>4 detection paths</h3>
+                    <p>Exit codes, output pattern matching, task process failures, and terminal close detection so silent errors can’t sneak by.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="icon">🎵</div>
+                    <h3>Instant meme feedback</h3>
+                    <p>Preloaded with iconic clips like “faah” and “ah shit, here we go again” that trigger the moment a command breaks.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="icon">⚡</div>
+                    <h3>Stay in the zone</h3>
+                    <p>No context switching. Keep typing while the audio cue tells you something needs attention.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="icon">⏱️</div>
+                    <h3>Cooldown & control</h3>
+                    <p>Debounce configuration prevents spam on rapid failures. Toggle the extension on/off anytime without uninstalling.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="icon">🧩</div>
+                    <h3>Command Palette ready</h3>
+                    <p>Run “Terminal Meme Sounds: Test Random Sound” to preview the playlist or show it off to your team.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="icon">🎛️</div>
+                    <h3>Custom soundpacks</h3>
+                    <p>Drop your own MP3s into <code>media/sounds</code>, update the list in <code>extension.ts</code>, and ship your own vibe.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section split" id="how">
+            <div class="section-heading left">
+                <p class="eyebrow">How it works</p>
+                <h2>Purpose-built detection so nothing slips by.</h2>
+                <p class="section-lede">
+                    Terminal Meme Error Sounds leans on VS Code’s terminal APIs and layered fallbacks to make sure every failure is heard.
+                </p>
+                <div class="steps">
+                    <div class="step">
+                        <span class="step-number">01</span>
+                        <div>
+                            <h4>Listen to your shells</h4>
+                            <p>Hooks into shell execution end events to watch exit codes in every terminal tab.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">02</span>
+                        <div>
+                            <h4>Scan for bad output</h4>
+                            <p>Pattern matching for common error strings catches failures even when exit codes lie.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">03</span>
+                        <div>
+                            <h4>Cover tasks & closes</h4>
+                            <p>Build/test task process failures and non-zero exits on close both fire the same audio cue.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">04</span>
+                        <div>
+                            <h4>Play a random meme</h4>
+                            <p>Picks a track, respects your cooldown, and logs to “Terminal Meme Sounds” for easy debugging.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel highlight">
+                <h3>Built for real-world terminals</h3>
+                <ul>
+                    <li>Cross-platform audio playback on Windows, macOS, and Linux.</li>
+                    <li>Configurable debounce to avoid noise during rapid CI runs.</li>
+                    <li>Quick enable/disable switch so you’re in control.</li>
+                    <li>Command Palette test command for demos and sanity checks.</li>
+                    <li>Log output channel for visibility when things get weird.</li>
+                </ul>
+                <div class="mini-cta">
+                    <span class="pill">Zero config to start</span>
+                    <span class="pill">Meme-ready out of the box</span>
+                    <span class="pill">Customizable when you want</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="customize">
+            <div class="cta-card">
+                <div>
+                    <p class="eyebrow">Make bugs impossible to ignore</p>
+                    <h2>Bring audio-first awareness to your terminal workflow.</h2>
+                    <p class="section-lede">
+                        Install the extension, trigger the test command, and ship your own soundtrack for errors. Your future self will thank you.
+                    </p>
+                    <div class="cta-group">
+                        <a class="btn primary" href="https://marketplace.visualstudio.com/items?itemName=0xasr-dev.terminal-meme-error-sounds" target="_blank" rel="noreferrer">Install now</a>
+                        <a class="btn ghost" href="https://github.com/0xasr-dev/terminal-meme-error-sounds" target="_blank" rel="noreferrer">See the code</a>
+                    </div>
+                </div>
+                <div class="pill-stack">
+                    <span class="pill">Cross-platform playback</span>
+                    <span class="pill">Smart detection layers</span>
+                    <span class="pill">Drop-in custom MP3s</span>
+                    <span class="pill">Made for VS Code</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>Made with ❤️ by <a href="https://github.com/0xasr-dev" target="_blank" rel="noreferrer">0xASR</a></p>
+        <div class="footer-links">
+            <a href="https://github.com/0xasr-dev/terminal-meme-error-sounds" target="_blank" rel="noreferrer">GitHub</a>
+            <span>•</span>
+            <a href="https://github.com/0xasr-dev/terminal-meme-error-sounds/issues" target="_blank" rel="noreferrer">Report Issue</a>
+            <span>•</span>
+            <a href="https://github.com/0xasr-dev/terminal-meme-error-sounds/blob/main/LICENSE" target="_blank" rel="noreferrer">MIT License</a>
+        </div>
+    </footer>
 </body>
 </html>
