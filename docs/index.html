@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Meme Error Sounds - VSCode Extension</title>
+    <meta name="description" content="A VSCode extension that plays hilarious meme sounds when your terminal commands fail. Debugging just got fun!">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <canvas id="meme-canvas"></canvas>
+
+    <div class="scanlines"></div>
+
+    <div class="container">
+        <header class="hero">
+            <div class="crt-effect">
+                <h1 class="glitch" data-text="Terminal Meme Error Sounds">
+                    Terminal Meme Error Sounds
+                </h1>
+                <p class="subtitle pixel-text">
+                    🔊 Make terminal errors entertaining again!
+                </p>
+            </div>
+        </header>
+
+        <section class="features">
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <span class="terminal-button close"></span>
+                    <span class="terminal-button minimize"></span>
+                    <span class="terminal-button maximize"></span>
+                    <span class="terminal-title">terminal-meme-sounds@1.0.0</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-line">
+                        <span class="prompt">$</span> npm test
+                    </div>
+                    <div class="terminal-line error-line">
+                        <span class="error-text">ERROR: Test suite failed</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="meme-text">🎵 *plays "aah shit, here we go again"*</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎵</div>
+                <h3>Random Meme Sounds</h3>
+                <p>Plays hilarious sounds like "faah" or "ah shit, here we go again" on every error</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3>Smart Detection</h3>
+                <p>4 detection methods: exit codes, output patterns, task failures, and terminal closes</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⏱️</div>
+                <h3>Debounce Control</h3>
+                <p>Configurable cooldown to prevent sound spam on rapid failures</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🖥️</div>
+                <h3>Cross-Platform</h3>
+                <p>Works seamlessly on Windows, macOS, and Linux</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎲</div>
+                <h3>Customizable</h3>
+                <p>Add your own meme sounds easily - just drop MP3s in the folder</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔇</div>
+                <h3>Toggle On/Off</h3>
+                <p>Enable or disable anytime without uninstalling</p>
+            </div>
+        </section>
+
+        <section class="installation">
+            <h2 class="section-title pixel-text">Installation</h2>
+            <div class="install-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Open VSCode Extensions</h3>
+                        <code>Ctrl+Shift+X</code>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Search for Extension</h3>
+                        <code>"Terminal Meme Error Sounds"</code>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Click Install</h3>
+                        <p>That's it! Start debugging with style 🎉</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <a href="https://github.com/0xasr-dev/terminal-meme-error-sounds" class="btn btn-primary" target="_blank">
+                <span class="btn-glow"></span>
+                View on GitHub
+            </a>
+            <a href="https://marketplace.visualstudio.com/items?itemName=0xasr-dev.terminal-meme-error-sounds" class="btn btn-secondary" target="_blank">
+                <span class="btn-glow"></span>
+                Install from Marketplace
+            </a>
+        </section>
+
+        <footer class="footer">
+            <p class="pixel-text">
+                Made with ❤️ by <a href="https://github.com/0xasr-dev" target="_blank">0xASR</a>
+            </p>
+            <p class="footer-links">
+                <a href="https://github.com/0xasr-dev/terminal-meme-error-sounds" target="_blank">GitHub</a>
+                <span class="separator">•</span>
+                <a href="https://github.com/0xasr-dev/terminal-meme-error-sounds/issues" target="_blank">Report Issue</a>
+                <span class="separator">•</span>
+                <a href="https://github.com/0xasr-dev/terminal-meme-error-sounds/blob/main/LICENSE" target="_blank">MIT License</a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="assets/js/memes.js"></script>
+    <script src="assets/js/glitch.js"></script>
+</body>
+</html>
