@@ -1,216 +1,325 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="light" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terminal Meme Error Sounds | Make failed commands unforgettable</title>
-    <meta name="description" content="Terminal Meme Error Sounds is a VS Code extension that detects terminal failures and drops meme audio instantly. Stay in flow, catch errors faster, and customize the soundtrack.">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Terminal Meme Error Sounds | Scale your debugging</title>
+    <meta name="description" content="A VS Code extension that plays meme sounds when terminal commands fail. 4 detection methods, debounce controls, diagnostic logs, and cross-platform audio.">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+        <link href="assets/css/style.css" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#c4ec00",
+                    "surface-tint": "#516200",
+                    "error": "#b02500",
+                    "inverse-surface": "#0b0f10",
+                    "on-tertiary": "#fff2c9",
+                    "on-surface-variant": "#595c5e",
+                    "on-secondary-fixed-variant": "#535b71",
+                    "on-tertiary-container": "#5c4e00",
+                    "on-error-container": "#520c00",
+                    "error-dim": "#b92902",
+                    "secondary-container": "#dae2fd",
+                    "on-primary-fixed-variant": "#556800",
+                    "secondary-fixed-dim": "#ccd4ee",
+                    "tertiary-fixed": "#fcdc43",
+                    "on-primary-fixed": "#3c4a00",
+                    "on-error": "#ffefec",
+                    "surface-dim": "#d0d5d8",
+                    "on-background": "#2c2f31",
+                    "inverse-on-surface": "#9a9d9f",
+                    "surface-bright": "#f5f7f9",
+                    "inverse-primary": "#d4ff00",
+                    "on-primary-container": "#4c5d00",
+                    "on-secondary-container": "#4a5167",
+                    "secondary-fixed": "#dae2fd",
+                    "tertiary-fixed-dim": "#edce35",
+                    "surface-container-highest": "#d9dde0",
+                    "secondary": "#535b71",
+                    "surface-container": "#e5e9eb",
+                    "surface": "#f5f7f9",
+                    "primary-dim": "#465600",
+                    "on-tertiary-fixed-variant": "#675700",
+                    "tertiary": "#6b5b00",
+                    "on-secondary-fixed": "#373f54",
+                    "primary-fixed": "#d1fc00",
+                    "background": "#f5f7f9",
+                    "on-tertiary-fixed": "#473b00",
+                    "on-primary": "#e3ff7b",
+                    "outline": "#747779",
+                    "tertiary-dim": "#5d4f00",
+                    "surface-container-high": "#dfe3e6",
+                    "tertiary-container": "#fcdc43",
+                    "primary": "#516200",
+                    "on-surface": "#2c2f31",
+                    "primary-container": "#d1fc00",
+                    "surface-variant": "#d9dde0",
+                    "surface-container-low": "#eef1f3",
+                    "outline-variant": "#abadaf",
+                    "on-secondary": "#f0f2ff",
+                    "secondary-dim": "#484f65",
+                    "surface-container-lowest": "#ffffff",
+                    "error-container": "#f95630"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: #f5f7f9; }
+        .glass { backdrop-filter: blur(20px); background: rgba(245, 247, 249, 0.8); }
+        .organic-blob {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        }
+    </style>
 </head>
-<body>
-    <div class="gradient-bg">
-        <div class="orb orb-a"></div>
-        <div class="orb orb-b"></div>
-        <div class="orb orb-c"></div>
+<body class="text-on-surface">
+<!-- TopNavBar -->
+<nav class="w-full sticky top-0 z-50 bg-[#f5f7f9] dark:bg-slate-900">
+    <div class="flex justify-between items-center max-w-[1200px] mx-auto px-8 py-4">
+        <div class="text-xl font-bold tracking-tighter text-[#2c2f31] dark:text-slate-100">Terminal Meme Sounds</div>
+        <div class="hidden md:flex gap-8 items-center font-['Inter'] tracking-tight text-sm font-medium">
+            <a class="text-[#595c5e] dark:text-slate-400 hover:text-[#2c2f31] hover:text-[#516200] transition-colors duration-200" href="https://github.com/0xASR-dev/terminal-error-sound" target="_blank" rel="noreferrer">Repository</a>
+            <a class="text-[#595c5e] dark:text-slate-400 hover:text-[#2c2f31] hover:text-[#516200] transition-colors duration-200" href="https://github.com/0xASR-dev/terminal-error-sound" target="_blank" rel="noreferrer">Readme</a>
+            <a class="bg-primary-container text-on-primary-fixed px-4 py-2 rounded-lg font-bold hover:opacity-90 transition-all flex items-center gap-2" href="https://github.com/0xASR-dev/terminal-error-sound" target="_blank" rel="noreferrer">
+                Open Repo
+                <span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
+            </a>
+        </div>
     </div>
+</nav>
 
-    <header class="nav">
-        <div class="brand">
-            <span class="brand-mark">Terminal</span>
-            <span class="brand-name">Meme Error Sounds</span>
-            <span class="badge">VS Code</span>
+<main class="max-w-[1200px] mx-auto px-8">
+    <!-- Hero Section -->
+    <section class="py-24 flex flex-col items-center text-center">
+        <h1 class="text-6xl font-extrabold tracking-tight mb-8 max-w-4xl leading-[1.1]">
+            Scale your debugging.<br/><span class="text-primary">With meme sounds.</span>
+        </h1>
+        <p class="text-on-surface-variant text-xl mb-12 max-w-2xl">
+            Terminal Meme Error Sounds plays a random meme clip the moment your VS Code terminal fails. Four detection layers, configurable debounce, and a diagnostic log—so you catch errors faster (and laugh a little).
+        </p>
+        <div class="flex gap-4">
+            <a class="bg-primary-container text-on-primary-fixed px-8 py-4 rounded-lg font-bold text-lg hover:opacity-90 transition-all flex items-center gap-2" href="https://github.com/0xASR-dev/terminal-error-sound" target="_blank" rel="noreferrer">
+                Open Repository <span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+            </a>
+            <a class="bg-transparent border border-outline px-8 py-4 rounded-lg font-bold text-lg hover:bg-surface-container-high transition-all" href="https://github.com/0xASR-dev/terminal-error-sound" target="_blank" rel="noreferrer">
+                View on GitHub
+            </a>
         </div>
-        <nav class="nav-links">
-            <a href="#features">Features</a>
-            <a href="#how">How it works</a>
-            <a href="#customize">Customize</a>
-        </nav>
-        <div class="nav-actions">
-            <a class="btn ghost" href="https://github.com/0xasr-dev/terminal-meme-error-sounds" target="_blank" rel="noreferrer">GitHub</a>
-            <a class="btn primary" href="https://marketplace.visualstudio.com/items?itemName=0xasr-dev.terminal-meme-error-sounds" target="_blank" rel="noreferrer">Install</a>
-        </div>
-    </header>
+    </section>
 
-    <main class="page">
-        <section class="hero" id="top">
-            <div class="hero-copy">
-                <p class="eyebrow">Autoplay meme audio the moment your terminal fails.</p>
-                <h1>Turn every broken command into a signal you can’t ignore.</h1>
-                <p class="lede">
-                    Terminal Meme Error Sounds watches your VS Code terminals, detects failures automatically, and drops iconic meme clips so you catch issues faster and keep coding with a grin.
-                </p>
-                <div class="cta-group">
-                    <a class="btn primary" href="https://marketplace.visualstudio.com/items?itemName=0xasr-dev.terminal-meme-error-sounds" target="_blank" rel="noreferrer">Install on VS Code</a>
-                    <a class="btn secondary" href="https://github.com/0xasr-dev/terminal-meme-error-sounds" target="_blank" rel="noreferrer">View on GitHub</a>
-                </div>
-                <div class="pill-row">
-                    <span class="pill">Exit codes · Output patterns · Build tasks · Terminal closes</span>
-                    <span class="pill">Randomized meme playlist</span>
-                    <span class="pill">Cooldown to prevent spam</span>
-                </div>
+    <!-- Terminal Mockup Section -->
+    <section class="mb-32 relative">
+        <div class="bg-inverse-surface rounded-xl p-8 shadow-2xl relative overflow-hidden group">
+            <!-- Mac Traffic Lights -->
+            <div class="flex gap-2 mb-6">
+                <div class="w-3 h-3 rounded-full bg-error"></div>
+                <div class="w-3 h-3 rounded-full bg-tertiary"></div>
+                <div class="w-3 h-3 rounded-full bg-primary-fixed-dim"></div>
             </div>
-
-            <div class="hero-visual">
-                <div class="card terminal">
-                    <div class="card-header">
-                        <div class="dots">
-                            <span class="dot red"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot green"></span>
-                        </div>
-                        <span class="title">terminal-meme-error-sounds</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="term-line"><span class="prompt">$</span> npm test</div>
-                        <div class="term-line error">✕ Test suite failed</div>
-                        <div class="term-line playback">▶ Playing: "ah-shit-here-we-go-again.mp3"</div>
-                        <div class="meta">Detected via exit code + error keywords</div>
-                        <div class="meter">
-                            <span class="meter-fill"></span>
-                        </div>
-                    </div>
+            <!-- Code Block -->
+            <div class="font-mono text-sm leading-relaxed">
+                <div class="flex gap-4">
+                    <span class="text-on-surface-variant opacity-50">01</span>
+                    <span class="text-surface-container-lowest">$ npm run test</span>
                 </div>
-
-                <div class="stack">
-                    <div class="chip">Debounce: 2.5s to keep alerts intentional</div>
-                    <div class="chip">Command Palette → Terminal Meme Sounds: Test Random Sound</div>
-                    <div class="chip accent">Drop your own .mp3 files into media/sounds</div>
+                <div class="flex gap-4">
+                    <span class="text-on-surface-variant opacity-50">02</span>
+                    <span class="text-surface-container-lowest"></span>
+                </div>
+                <div class="flex gap-4">
+                    <span class="text-on-surface-variant opacity-50">03</span>
+                    <span class="text-surface-container-lowest">> testing app...</span>
+                </div>
+                <div class="flex gap-4">
+                    <span class="text-on-surface-variant opacity-50">04</span>
+                    <span class="text-error">FAIL: Expected 1 to be 2.</span>
+                </div>
+                <div class="flex gap-4">
+                    <span class="text-on-surface-variant opacity-50">05</span>
+                    <span class="text-error">npm ERR! Test failed.  See above for more details.</span>
                 </div>
             </div>
-        </section>
-
-        <section class="section" id="features">
-            <div class="section-heading">
-                <p class="eyebrow">Why developers keep it on</p>
-                <h2>Catch failures instantly. Stay in flow. Laugh at bugs.</h2>
-                <p class="section-lede">Purpose-built for terminal-heavy workflows so you never miss a broken build, failing test, or typo again.</p>
-            </div>
-
-            <div class="feature-grid">
-                <article class="feature-card">
-                    <div class="icon">🧠</div>
-                    <h3>4 detection paths</h3>
-                    <p>Exit codes, output pattern matching, task process failures, and terminal close detection so silent errors can’t sneak by.</p>
-                </article>
-                <article class="feature-card">
-                    <div class="icon">🎵</div>
-                    <h3>Instant meme feedback</h3>
-                    <p>Preloaded with iconic clips like “faah” and “ah shit, here we go again” that trigger the moment a command breaks.</p>
-                </article>
-                <article class="feature-card">
-                    <div class="icon">⚡</div>
-                    <h3>Stay in the zone</h3>
-                    <p>No context switching. Keep typing while the audio cue tells you something needs attention.</p>
-                </article>
-                <article class="feature-card">
-                    <div class="icon">⏱️</div>
-                    <h3>Cooldown & control</h3>
-                    <p>Debounce configuration prevents spam on rapid failures. Toggle the extension on/off anytime without uninstalling.</p>
-                </article>
-                <article class="feature-card">
-                    <div class="icon">🧩</div>
-                    <h3>Command Palette ready</h3>
-                    <p>Run “Terminal Meme Sounds: Test Random Sound” to preview the playlist or show it off to your team.</p>
-                </article>
-                <article class="feature-card">
-                    <div class="icon">🎛️</div>
-                    <h3>Custom soundpacks</h3>
-                    <p>Drop your own MP3s into <code>media/sounds</code>, update the list in <code>extension.ts</code>, and ship your own vibe.</p>
-                </article>
-            </div>
-        </section>
-
-        <section class="section split" id="how">
-            <div class="section-heading left">
-                <p class="eyebrow">How it works</p>
-                <h2>Purpose-built detection so nothing slips by.</h2>
-                <p class="section-lede">
-                    Terminal Meme Error Sounds leans on VS Code’s terminal APIs and layered fallbacks to make sure every failure is heard.
-                </p>
-                <div class="steps">
-                    <div class="step">
-                        <span class="step-number">01</span>
-                        <div>
-                            <h4>Listen to your shells</h4>
-                            <p>Hooks into shell execution end events to watch exit codes in every terminal tab.</p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">02</span>
-                        <div>
-                            <h4>Scan for bad output</h4>
-                            <p>Pattern matching for common error strings catches failures even when exit codes lie.</p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">03</span>
-                        <div>
-                            <h4>Cover tasks & closes</h4>
-                            <p>Build/test task process failures and non-zero exits on close both fire the same audio cue.</p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">04</span>
-                        <div>
-                            <h4>Play a random meme</h4>
-                            <p>Picks a track, respects your cooldown, and logs to “Terminal Meme Sounds” for easy debugging.</p>
-                        </div>
-                    </div>
+            
+            <!-- Toast Notification Overlay -->
+            <div class="absolute bottom-8 right-8 bg-surface-container-lowest border-l-4 border-primary p-4 rounded shadow-xl flex items-center gap-4 animate-bounce">
+                <div class="bg-primary-container p-2 rounded-full">
+                    <span class="material-symbols-outlined text-on-primary-container" data-icon="music_note">music_note</span>
                 </div>
-            </div>
-            <div class="panel highlight">
-                <h3>Built for real-world terminals</h3>
-                <ul>
-                    <li>Cross-platform audio playback on Windows, macOS, and Linux.</li>
-                    <li>Configurable debounce to avoid noise during rapid CI runs.</li>
-                    <li>Quick enable/disable switch so you’re in control.</li>
-                    <li>Command Palette test command for demos and sanity checks.</li>
-                    <li>Log output channel for visibility when things get weird.</li>
-                </ul>
-                <div class="mini-cta">
-                    <span class="pill">Zero config to start</span>
-                    <span class="pill">Meme-ready out of the box</span>
-                    <span class="pill">Customizable when you want</span>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="customize">
-            <div class="cta-card">
                 <div>
-                    <p class="eyebrow">Make bugs impossible to ignore</p>
-                    <h2>Bring audio-first awareness to your terminal workflow.</h2>
-                    <p class="section-lede">
-                        Install the extension, trigger the test command, and ship your own soundtrack for errors. Your future self will thank you.
-                    </p>
-                    <div class="cta-group">
-                        <a class="btn primary" href="https://marketplace.visualstudio.com/items?itemName=0xasr-dev.terminal-meme-error-sounds" target="_blank" rel="noreferrer">Install now</a>
-                        <a class="btn ghost" href="https://github.com/0xasr-dev/terminal-meme-error-sounds" target="_blank" rel="noreferrer">See the code</a>
-                    </div>
-                </div>
-                <div class="pill-stack">
-                    <span class="pill">Cross-platform playback</span>
-                    <span class="pill">Smart detection layers</span>
-                    <span class="pill">Drop-in custom MP3s</span>
-                    <span class="pill">Made for VS Code</span>
+                    <p class="text-xs font-bold text-on-surface uppercase tracking-widest">Now Playing</p>
+                    <p class="text-sm font-medium text-on-surface-variant">Ah shit, here we go again</p>
                 </div>
             </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <p>Made with ❤️ by <a href="https://github.com/0xasr-dev" target="_blank" rel="noreferrer">0xASR</a></p>
-        <div class="footer-links">
-            <a href="https://github.com/0xasr-dev/terminal-meme-error-sounds" target="_blank" rel="noreferrer">GitHub</a>
-            <span>•</span>
-            <a href="https://github.com/0xasr-dev/terminal-meme-error-sounds/issues" target="_blank" rel="noreferrer">Report Issue</a>
-            <span>•</span>
-            <a href="https://github.com/0xasr-dev/terminal-meme-error-sounds/blob/main/LICENSE" target="_blank" rel="noreferrer">MIT License</a>
         </div>
-    </footer>
+        <!-- Decorative Image -->
+        <div class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary via-transparent to-transparent"></div>
+    </section>
+
+    <!-- Feature Grid (Bento Style) -->
+    <section id="stats" class="mb-32">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold tracking-tight text-on-surface">Meme-powered error awareness</h2>
+            <p class="text-on-surface-variant mt-4 max-w-2xl mx-auto">Catch non‑zero exits, noisy error output, and failed tasks without staring at the terminal—get an instant sound cue instead.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-surface-container-low p-8 rounded-xl flex flex-col gap-4 group hover:bg-surface-container-high transition-all">
+                <div class="bg-surface-container-lowest w-12 h-12 flex items-center justify-center rounded-lg shadow-sm">
+                    <span class="material-symbols-outlined text-primary" data-icon="psychology">psychology</span>
+                </div>
+                <h3 class="text-xl font-bold tracking-tight">4 Detection Methods</h3>
+                <p class="text-on-surface-variant leading-relaxed">Exit codes, output patterns, task failures, and terminal close detection working together.</p>
+            </div>
+            
+            <div class="bg-surface-container-low p-8 rounded-xl flex flex-col gap-4 group hover:bg-surface-container-high transition-all">
+                <div class="bg-surface-container-lowest w-12 h-12 flex items-center justify-center rounded-lg shadow-sm">
+                    <span class="material-symbols-outlined text-primary" data-icon="devices">devices</span>
+                </div>
+                <h3 class="text-xl font-bold tracking-tight">Win/Mac/Linux</h3>
+                <p class="text-on-surface-variant leading-relaxed">Uses native playback: PowerShell MediaPlayer (Windows), <code>afplay</code> (macOS), and <code>mpv</code>/<code>ffplay</code>/<code>aplay</code> (Linux).</p>
+            </div>
+            
+            <div class="bg-surface-container-low p-8 rounded-xl flex flex-col gap-4 group hover:bg-surface-container-high transition-all">
+                <div class="bg-surface-container-lowest w-12 h-12 flex items-center justify-center rounded-lg shadow-sm">
+                    <span class="material-symbols-outlined text-primary" data-icon="security">security</span>
+                </div>
+                <h3 class="text-xl font-bold tracking-tight">2500ms Debounce</h3>
+                <p class="text-on-surface-variant leading-relaxed">Tune <code>terminalMemeSounds.debounceMs</code> to prevent spam, or toggle the extension entirely.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Developer Grade Section -->
+    <section id="security" class="bg-surface-container-lowest rounded-xl p-12 mb-32 flex flex-col gap-8 border border-outline-variant/10">
+        <div>
+            <h2 class="text-3xl font-bold tracking-tight mb-4">Developer-grade quality</h2>
+            <p class="text-on-surface-variant">Reliable & predictable by design.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="flex items-start gap-4">
+                <span class="material-symbols-outlined text-primary mt-1" data-icon="check_circle">check_circle</span>
+                <div>
+                    <h4 class="font-bold text-lg">VS Code native</h4>
+                    <p class="text-on-surface-variant">Built on official terminal APIs and shell integration for robust detection across workflows.</p>
+                </div>
+            </div>
+            
+            <div class="flex items-start gap-4">
+                <span class="material-symbols-outlined text-primary mt-1" data-icon="build">build</span>
+                <div>
+                    <h4 class="font-bold text-lg">Fallback detection</h4>
+                    <p class="text-on-surface-variant">Exit codes first, then output pattern matching for common failures like <code>command not found</code>, <code>Traceback</code>, and <code>SyntaxError</code>.</p>
+                </div>
+            </div>
+            
+            <div class="flex items-start gap-4">
+                <span class="material-symbols-outlined text-primary mt-1" data-icon="rule">rule</span>
+                <div>
+                    <h4 class="font-bold text-lg">Task failures included</h4>
+                    <p class="text-on-surface-variant">Detects failed VS Code tasks (build/test) via <code>onDidEndTaskProcess</code>.</p>
+                </div>
+            </div>
+            
+            <div class="flex items-start gap-4">
+                <span class="material-symbols-outlined text-primary mt-1" data-icon="tune">tune</span>
+                <div>
+                    <h4 class="font-bold text-lg">Command Palette test</h4>
+                    <p class="text-on-surface-variant">Run <code>Terminal Meme Sounds: Test Random Sound</code> anytime to verify audio and show it off.</p>
+                </div>
+            </div>
+            
+            <div class="flex items-start gap-4">
+                <span class="material-symbols-outlined text-primary mt-1" data-icon="vpn_lock">vpn_lock</span>
+                <div>
+                    <h4 class="font-bold text-lg">Local-only</h4>
+                    <p class="text-on-surface-variant">No accounts, no network calls, no telemetry—just a local extension reacting to your terminal.</p>
+                </div>
+            </div>
+            
+            <div class="flex items-start gap-4">
+                <span class="material-symbols-outlined text-primary mt-1" data-icon="bug_report">bug_report</span>
+                <div>
+                    <h4 class="font-bold text-lg">Diagnostic logging</h4>
+                    <p class="text-on-surface-variant">Full visibility in the <code>Terminal Meme Sounds Log</code> output channel when you need to troubleshoot.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="mb-32">
+        <div class="bg-primary-container text-on-primary-container rounded-xl p-12 text-center max-w-4xl mx-auto shadow-lg relative overflow-hidden">
+            <span class="material-symbols-outlined absolute top-8 left-8 text-primary opacity-20 text-6xl" data-icon="format_quote">format_quote</span>
+            <h3 class="text-2xl font-bold mb-8 relative z-10 leading-relaxed">
+                “We stopped missing failing <code>npm test</code> runs when the terminal is in another split. One sound, instant awareness—without breaking flow.”
+            </h3>
+            <div class="flex items-center justify-center gap-4 relative z-10">
+                <!-- <div class="w-12 h-12 bg-primary text-on-primary rounded-full flex items-center justify-center font-bold">TM</div> -->
+                <!-- <div class="text-left">
+                    <span class="block font-bold">VS Code developers</span>
+                    <span class="block text-sm opacity-80">Shipping with fewer missed failures</span>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Developer Section -->
+    <section class="py-24 flex flex-col items-center text-center">
+        <div class="relative mb-8">
+            <!-- Irregular decorative blob background -->
+            <div class="absolute inset-0 organic-blob bg-primary/10 w-48 h-48 -translate-x-4 -translate-y-2 scale-110"></div>
+            <a class="relative block w-40 h-40 rounded-full overflow-hidden border-4 border-surface-container-lowest shadow-lg" href="https://github.com/0xASR-dev" target="_blank" rel="noreferrer" aria-label="Open developer GitHub profile">
+                <img alt="AVNEESH SINGH" class="w-full h-full object-cover" src="https://github.com/0xasr-dev.png"/>
+            </a>
+        </div>
+        <div class="space-y-1">
+            <h2 class="text-2xl font-bold tracking-tight text-on-surface uppercase">AVNEESH SINGH</h2>
+            <p class="text-on-secondary-fixed-variant font-medium tracking-tight">Software Engineer & Extension Developer</p>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-[#f5f7f9] dark:bg-slate-950 w-full py-12 border-t border-slate-200 dark:border-slate-800">
+    <div class="flex flex-col md:flex-row justify-between items-center max-w-[1200px] mx-auto px-8 gap-6">
+        <div class="font-bold text-[#2c2f31] flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary" data-icon="terminal">terminal</span>
+            Terminal Meme Error Sounds
+        </div>
+        <div class="flex gap-8 font-['Inter'] text-xs uppercase tracking-widest flex-wrap justify-center">
+            <a class="text-[#595c5e] dark:text-slate-500 hover:underline decoration-[#d1fc00] underline-offset-4 transition-all duration-300 ease-in-out" href="https://github.com/0xASR-dev/terminal-error-sound" target="_blank" rel="noreferrer">Marketplace</a>
+            <a class="text-[#595c5e] dark:text-slate-500 hover:underline decoration-[#d1fc00] underline-offset-4 transition-all duration-300 ease-in-out" href="https://github.com/0xASR-dev/terminal-error-sound" target="_blank" rel="noreferrer">Docs</a>
+            <a class="text-[#595c5e] dark:text-slate-500 hover:underline decoration-[#d1fc00] underline-offset-4 transition-all duration-300 ease-in-out" href="https://github.com/0xASR-dev/terminal-error-sound" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="text-[#595c5e] dark:text-slate-500 hover:underline decoration-[#d1fc00] underline-offset-4 transition-all duration-300 ease-in-out" href="https://github.com/0xASR-dev/terminal-error-sound" target="_blank" rel="noreferrer">Changelog</a>
+        </div>
+        <div class="text-[#595c5e] dark:text-slate-500 font-['Inter'] text-xs uppercase tracking-widest text-center">
+            © 2026 Made by 0xASR-dev. MIT License.
+        </div>
+    </div>
+</footer>
+
 </body>
 </html>

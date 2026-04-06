@@ -8,7 +8,7 @@ This folder contains the landing page for the Terminal Meme Error Sounds VSCode 
 docs/
 ├── assets/
 │   ├── css/
-│   │   └── style.css       # Retro-style CSS with animations
+│   │   └── style.css       # Latest landing page stylesheet
 │   ├── js/
 │   │   ├── memes.js        # Floating memes with gravity interaction
 │   │   └── glitch.js       # Glitch effects and interactions
@@ -19,11 +19,10 @@ docs/
 
 ## Features
 
-- 🎨 **Retro CRT aesthetic** with scanlines and glitch effects
-- 🎭 **20+ floating meme emojis** with realistic physics (gravity, friction, bounce)
-- 🖱️ **Mouse/touch gravity interaction** - memes are pulled toward your cursor
+- ✨ **Clean, minimal landing page** inspired by modern product sites
+- 🧱 **Section-based layout** (Hero → Product → Customer story → Enterprise-grade → Insights → CTA)
 - 📱 **Fully responsive** design for all screen sizes
-- ⚡ **Pure vanilla JavaScript** - no frameworks, fast load times
+- ⚡ **Fast, framework-free** HTML/CSS (no build step)
 - 🌐 **GitHub Pages ready** - just enable Pages in repo settings
 
 ## Local Development
